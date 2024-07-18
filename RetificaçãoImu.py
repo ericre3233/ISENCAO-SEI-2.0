@@ -132,7 +132,7 @@ def RetificaçãoImu(contador, cont, bot: DesktopBot, self: DesktopBot, executat
                         #if not bot.find( "cidade2", matching=0.97, waiting_time=10000):
                         #   self.not_found("cidade2")
                         #bot.click() 
-                        pyautogui.click(r'.\resources\cidade3.png')
+                        pyautogui.click(r'.\resources\cidade2.png')
                         pyautogui.move(-30,10)
                         pyautogui.drag(250,40,0.25)  
 
