@@ -1,11 +1,10 @@
 from typing import Self
 from botcity.core import DesktopBot
-from ruralsei import ruralsei
-from RetificaçãoImu import RetificaçãoImu
-from ruralgerados import ruralgerados
-from Restituicao import Restituição
 from isencaosei import isencaosei
+#from isencaogerados import isencaogerados
 from isencaogerados import isencaogerados
+from enviarger import enviarger
+#from isencaoseigerados import isencaoseigerados
 #from etapas2 import etapas2
 import webbrowser
 from PySimpleGUI import PySimpleGUI as sg
@@ -16,7 +15,7 @@ import threading
 import time
 #eimport pyperclip
 
-contagem = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" ]
+contagem = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "35", "40", "45", "50", "100", "150", "200", "250", "300", "350"  ]
 #linkpaste= pyperclip.paste()
 #print(linkpaste)
 
@@ -48,18 +47,19 @@ class Bot(DesktopBot):
                                                 [sg.Text('', justification='center')],
                                                 [sg.Text('Para interromper, pressionar E',justification='center')],
                                                 [sg.Text('', justification='center')],
-                                                [sg.Button('PRODUTOR RURAL-SEI')],
-                                                [sg.Text('', justification='center')],
-                                                [sg.Button('PRODUTOR RURAL-GERADOS')],    
-                                                [sg.Text('', justification='center')],
-                                                [sg.Button('RETIFICAÇÃO/IMUNIDADE-SEI')],  
-                                                [sg.Text('', justification='center')],
-                                                [sg.Button('RESTITUIÇÃO-SEI')],  
-                                                [sg.Text('', justification='center')],
-                                                [sg.Button('ISENÇÃO-SEI')],  
-                                                [sg.Text('', justification='center')],
-                                                [sg.Button('ISENÇÃO-GERADOS')],  
-                                                [sg.Text('', justification='center')],
+                                                [sg.Text('PLANIHAR PROCESSOS SEI:',justification='center')],
+                                                [sg.Button('ISENÇÃO DE IPVA /ICMS -- TAXI / PCD - SEI', pad=(0, 5))],  
+                                                [sg.Button('RETIFICAÇÃO / RESTITUIÇÃO / RESSARCIMENTO / IMUN-SEI', pad=(0, 5))],
+                                                [sg.Button('PRODUTOR RURAL - SEI', pad=(0, 5))],
+                                                                       
+                                                [sg.Text('',justification='center')],
+                                                [sg.Text('PLANILHAR PROCESSOS GERADOS:',justification='center')],
+                                                [sg.Button('ISENÇÃO DE IPVA /ICMS - TAXI / PCD  - GERADOS', pad=(0, 5))],
+                                                [sg.Button('ENVIAR PROCESSOS - COORD - GERADOS', pad=(0, 5))], 
+                                                 [sg.Button('IMUNIDADE IPVA - TEMPLOS/EDU/ITD/TRAB/POLIT  - GERADOS', pad=(0, 5))],                                                  
+                                                #[sg.Button('ELÉTRICOS', pad=(0, 5))],   
+                                                #[sg.Button('IMU - ITD,TRAB,EDU,PJ', pad=(0, 5))], 
+                                                #[sg.Button('PRODUTOR RURAL - GERADOS', pad=(0, 5)) ],      
                                                                                                                                    
                                                 ]
                                         
@@ -69,49 +69,43 @@ class Bot(DesktopBot):
                                                 eventos, valores = janela1.read()
                                                 if eventos == sg.WINDOW_CLOSED:
                                                         break
-                                                if eventos == 'PRODUTOR RURAL-SEI':
+                                                if eventos == 'PRODUTOR RURAL - SEI':
                                                         cont= int(valores['contagem'])                                               
                                                         threading.Thread(target=interromper).start()
                                                         webbrowser.open(valores['link'])                                         
-                                                        ruralsei(contador, cont, bot=self, self=self)
+                                                        #ruralsei(contador, cont, bot=self, self=self)
 
-                                                if eventos == 'PRODUTOR RURAL-GERADOS':
+                                                if eventos == 'RETIFICAÇÃO / RESTITUIÇÃO / RESSARCIMENTO / IMUN-SEI':
                                                         cont= int(valores['contagem'])                                               
                                                         threading.Thread(target=interromper).start()
                                                         webbrowser.open(valores['link'])                                         
-                                                        ruralgerados(contador, cont, bot=self, self=self)
+                                                        #RetificaçãoImu(contador, cont, bot=self, self=self)
 
-                                                if eventos == 'RETIFICAÇÃO/IMUNIDADE-SEI':
-                                                        cont= int(valores['contagem'])                                               
-                                                        threading.Thread(target=interromper).start()
-                                                        webbrowser.open(valores['link'])                                         
-                                                        RetificaçãoImu(contador, cont, bot=self, self=self)
-
-                                                if eventos == 'RESTITUIÇÃO-SEI':
-                                                        cont= int(valores['contagem'])                                               
-                                                        threading.Thread(target=interromper).start()
-                                                        webbrowser.open(valores['link'])                                         
-                                                        Restituição(contador, cont, bot=self, self=self)
-                                                
-                                                if eventos == 'ISENÇÃO-SEI':
+                                                if eventos == 'ISENÇÃO DE IPVA /ICMS -- TAXI / PCD - SEI':
                                                         cont= int(valores['contagem'])                                               
                                                         threading.Thread(target=interromper).start()
                                                         webbrowser.open(valores['link'])                                         
                                                         isencaosei(contador, cont, bot=self, self=self)
 
-
-                                                if eventos == 'ISENÇÃO-GERADOS':
+                                                        
+                                                if eventos == 'ISENÇÃO DE IPVA /ICMS - TAXI / PCD  - GERADOS':
                                                         cont= int(valores['contagem'])                                               
                                                         threading.Thread(target=interromper).start()
                                                         webbrowser.open(valores['link'])                                         
                                                         isencaogerados(contador, cont, bot=self, self=self)
 
-                                                        
-                                                if eventos == 'ISENÇÃO-GERADOS':
+                                                                      
+                                                if eventos == 'ENVIAR PROCESSOS - COORD - GERADOS':
                                                         cont= int(valores['contagem'])                                               
                                                         threading.Thread(target=interromper).start()
                                                         webbrowser.open(valores['link'])                                         
-                                                        isencaosei(contador, cont, bot=self, self=self)
+                                                        enviarger(contador, cont, bot=self, self=self)
+
+                                                if eventos == 'IMUNIDADE IPVA - TEMPLOS/EDU/ITD/TRAB/POLIT  - GERADOS':
+                                                        cont= int(valores['contagem'])                                               
+                                                        threading.Thread(target=interromper).start()
+                                                        webbrowser.open(valores['link'])                                         
+                                                        #baixaisencaogerados(contador, cont, bot=self, self=self)
                                 except:  
                                         janela1.Close()
                                         #pass
